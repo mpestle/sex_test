@@ -1,0 +1,26 @@
+bamFiles          = "resources/{sample}.bam"
+rptFiles          = "results/{sample}.txt"
+
+import pandas as pd
+t = pd.read_table("config/samples.txt",header=None,names=["sample"],comment="#")
+t.set_index('sample',inplace=True)
+sampleName=t.index.values
+
+all_results = expand([rptFiles], sample = sampleName)
+
+rule all:
+    input:
+        all_results
+    output:
+        summary = "results/summary.rpt",
+    shell:
+        "cat results/*.txt | sort | uniq -c > {output.summary}"
+
+#################### Matt's flow ###########################
+rule determineSex:
+    input:
+        bam = "resources/{sample}.bam",
+    output:
+        report = "results/{sample}.txt",
+    shell:
+        "workflow/scripts/sex_please {input.bam} > {output.report}"

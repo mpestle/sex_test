@@ -1,0 +1,24 @@
+#!/bin/bash
+# Check a file for maleness or femaleness
+# Algorithm: If the file is larger than 30MB, return "male"
+# Otherwise return "female"
+
+(($#==1)) || {
+    exit 1
+}
+
+F="$1"
+
+[[ -f "$F" ]] || {
+    exit 1
+}
+
+SZ_MB=$(du -m "$F" | awk '{print $1}')
+
+((SZ_MB > 30)) && {
+    echo "male"
+    exit 0
+}
+
+# otherwise...
+echo "female"
