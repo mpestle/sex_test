@@ -10,7 +10,7 @@ rule all:
     output:
         summary = "results/summary.rpt",
     shell:
-        "cat results/*.txt | sort | uniq -c > {output.summary}"
+        "workflow/scripts/summarise results/*.txt > {output.summary}"
 
 #################### Matt's flow ###########################
 rule determineSex:

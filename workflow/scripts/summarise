@@ -1,0 +1,11 @@
+#!/usr/bin/awk -f
+{
+    printf("%6s %s\n",$1, FILENAME)
+    freq[$1]++
+}
+END {
+    print "----- summary count ------"
+    for (s in freq) {
+        printf("%6s %s\n",s, freq[s]) | "sort"
+    }
+}
