@@ -1,12 +1,8 @@
+IDS, = glob_wildcards("resources/{id}.bam") # Bam files to iterate across
+
 bamFiles          = "resources/{sample}.bam"
 rptFiles          = "results/{sample}.txt"
-
-import pandas as pd
-t = pd.read_table("config/samples.txt",header=None,names=["sample"],comment="#")
-t.set_index('sample',inplace=True)
-sampleName=t.index.values
-
-all_results = expand([rptFiles], sample = sampleName)
+all_results = expand([rptFiles], sample = IDS)
 
 rule all:
     input:
