@@ -1,6 +1,5 @@
 IDS, = glob_wildcards("resources/{id}.bam") # Bam files to iterate across
 
-bamFiles          = "resources/{sample}.bam"
 rptFiles          = "results/{sample}.txt"
 all_results = expand([rptFiles], sample = IDS)
 
