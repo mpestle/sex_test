@@ -11,6 +11,7 @@ rule all:
     shell:
         "workflow/scripts/summarise results/*.txt > {output.summary}"
 
+#
 #################### Matt's flow ###########################
 rule determineSex:
     input:
